@@ -1,0 +1,39 @@
+modLoader = "javafml"
+loaderVersion = "[32,)"
+issueTrackerURL = ""
+license = "MIT License"
+
+[[mods]]
+modId = "change_of_cart"
+version = "${file.jarVersion}"
+logoFile = "logo.png"
+itemIcon = "minecraft:minecart"
+configBackground = "minecraft:textures/block/dirt.png"
+authors = "DavigJ"
+credits = ""
+displayURL = ""
+displayName = "Change of Cart"
+description = '''
+    Minecart QoL. Wax minecarts (or roll them over blocks like wool) for a quieter ride, or enjoy
+    '''
+
+[[dependencies.change_of_cart]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19.2,1.19.3)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.change_of_cart]]
+modId = "forge"
+mandatory = true
+versionRange = "[43.3.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.change_of_cart]]
+modId = "blueprint"
+mandatory = true
+versionRange = "[6.2.0,)"
+ordering = "AFTER"
+side = "BOTH"

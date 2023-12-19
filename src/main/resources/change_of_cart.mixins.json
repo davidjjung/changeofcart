@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "package": "com.davigj.change_of_cart.core.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "refmap": "change_of_cart.refmap.json",
+  "mixins": [
+    "AbstractMinecartMixin"
+  ],
+  "client": [
+    "LocalPlayerMixin",
+    "MinecartSoundInstanceMixin",
+    "RidingMinecartSoundInstanceMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
