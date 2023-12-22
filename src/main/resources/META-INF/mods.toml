@@ -1,6 +1,6 @@
 modLoader = "javafml"
 loaderVersion = "[32,)"
-issueTrackerURL = ""
+issueTrackerURL = "https://github.com/davidjjung/changeofcart/issues"
 license = "MIT License"
 
 [[mods]]
@@ -8,13 +8,13 @@ modId = "change_of_cart"
 version = "${file.jarVersion}"
 logoFile = "logo.png"
 itemIcon = "minecraft:minecart"
-configBackground = "minecraft:textures/block/dirt.png"
+configBackground = "minecraft:textures/block/gravel.png"
 authors = "DavigJ"
-credits = ""
-displayURL = ""
+credits = "Credits to Zym for the mod concept. Thanks to Jsburg and tallestred for code assistance"
+displayURL = "https://github.com/davidjjung/changeofcart"
 displayName = "Change of Cart"
 description = '''
-    Minecart QoL. Wax minecarts (or roll them over blocks like wool) for a quieter ride, or enjoy
+    Minecart QoL. Muffle carts with wax/wool, or reduce friction using gravel bedding.
     '''
 
 [[dependencies.change_of_cart]]
