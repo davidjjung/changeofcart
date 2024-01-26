@@ -20,7 +20,6 @@ public class AbstractMinecartMixin {
         AbstractMinecart cart = (AbstractMinecart) (Object) this;
         double frictionBonus = 0;
         if (cart.level.getBlockState(cart.blockPosition().below()).is(CCBlockTags.RAIL_BEDDING)) {
-
             frictionBonus += Mth.clamp(CCConfig.COMMON.railBeddingBonus.get() , 0, 10) * 0.1 * .003;
         }
         if (TrackedDataManager.INSTANCE.getValue(cart, ChangeOfCart.WAXED)) {
