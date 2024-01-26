@@ -16,7 +16,7 @@ public class CCConfig {
             waxingMuffles = builder.comment("Whether waxing a cart muffles it or not").define("Waxing muffles", true);
             mufflingBlocks = builder.comment("Whether carts are muffled by riding on the minecart_mufflers blocktag").define("Blocks muffle", true);
             maxMuffleVol = builder.comment("Max volume of a muffled minecart. Clamped between 0.0 and 0.75").define("Maximum minecart volume", 0.15);
-            railBeddingBonus = builder.comment("Reduced friction bonus for rail bedding, integer from 1 to 10.").define("rail bedding bonus", 6);
+            railBeddingBonus = builder.comment("Reduced friction bonus for rail bedding, integer from 1 to 10.").define("rail bedding bonus", 8);
             waxFrictionBonus = builder.comment("Reduced friction bonus for waxed carts, integer from 1 to 10.").define("waxy cart bonus", 0);
             builder.pop();
         }
