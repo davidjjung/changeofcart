@@ -35,11 +35,11 @@ public class CCEvents {
                     if (!player.getAbilities().instabuild) {
                         player.getItemInHand(event.getHand()).shrink(1);
                     }
-                    RandomSource random = cart.level.getRandom();
-                    if (player.level.isClientSide) {
-                        player.level.playSound(player, cart.blockPosition(), SoundEvents.HONEYCOMB_WAX_ON, SoundSource.NEUTRAL, 1.0F, 0.8F);
+                    RandomSource random = cart.level().getRandom();
+                    if (player.level().isClientSide) {
+                        player.level().playSound(player, cart.blockPosition(), SoundEvents.HONEYCOMB_WAX_ON, SoundSource.NEUTRAL, 1.0F, 0.8F);
                         for (int i = 0; i < 4; i++) {
-                            cart.level.addParticle(ParticleTypes.WAX_ON, cart.getX() + random.nextDouble() - 0.5,
+                            cart.level().addParticle(ParticleTypes.WAX_ON, cart.getX() + random.nextDouble() - 0.5,
                                     cart.getEyeY() + random.nextDouble(), cart.getZ() + random.nextDouble() - 0.5, 0, 0, 0);
                         }
                     }
@@ -55,11 +55,11 @@ public class CCEvents {
                             entity.broadcastBreakEvent(player.getItemInHand(event.getHand()).isEmpty() ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND);
                         });
                     }
-                    RandomSource random = cart.level.getRandom();
-                    if (player.level.isClientSide) {
-                        player.level.playSound(player, cart.blockPosition(), SoundEvents.AXE_WAX_OFF, SoundSource.NEUTRAL, 1.0F, 0.8F);
+                    RandomSource random = cart.level().getRandom();
+                    if (player.level().isClientSide) {
+                        player.level().playSound(player, cart.blockPosition(), SoundEvents.AXE_WAX_OFF, SoundSource.NEUTRAL, 1.0F, 0.8F);
                         for (int i = 0; i < 4; i++) {
-                            cart.level.addParticle(ParticleTypes.WAX_OFF, cart.getX() + random.nextDouble() - 0.5,
+                            cart.level().addParticle(ParticleTypes.WAX_OFF, cart.getX() + random.nextDouble() - 0.5,
                                     cart.getEyeY() + random.nextDouble(), cart.getZ() + random.nextDouble() - 0.5, 0, 0, 0);
                         }
                     }

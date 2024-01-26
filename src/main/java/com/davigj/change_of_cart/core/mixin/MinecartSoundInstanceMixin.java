@@ -3,7 +3,9 @@ package com.davigj.change_of_cart.core.mixin;
 import com.davigj.change_of_cart.core.ChangeOfCart;
 import com.davigj.change_of_cart.core.CCConfig;
 import com.davigj.change_of_cart.core.other.CCBlockTags;
+import com.teamabnormals.blueprint.client.screen.shaking.ScreenShakeHandler;
 import com.teamabnormals.blueprint.common.world.storage.tracking.TrackedDataManager;
+import net.minecraft.client.particle.TextureSheetParticle;
 import net.minecraft.client.resources.sounds.MinecartSoundInstance;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
@@ -29,7 +31,7 @@ public class MinecartSoundInstanceMixin {
             MinecartSoundInstance sound = (MinecartSoundInstance) (Object) this;
             TrackedDataManager manager = TrackedDataManager.INSTANCE;
             boolean waxMuffle = manager.getValue(minecart, ChangeOfCart.WAXED) && CCConfig.COMMON.waxingMuffles.get();
-            boolean woolMuffle = minecart.level.getBlockState(minecart.blockPosition().below()).is(CCBlockTags.MINECART_MUFFLERS) && CCConfig.COMMON.mufflingBlocks.get();
+            boolean woolMuffle = minecart.level().getBlockState(minecart.blockPosition().below()).is(CCBlockTags.MINECART_MUFFLERS) && CCConfig.COMMON.mufflingBlocks.get();
             if (waxMuffle || woolMuffle) {
                 float f = (float)sound.minecart.getDeltaMovement().horizontalDistance();
                 if (f >= 0.01F) {
