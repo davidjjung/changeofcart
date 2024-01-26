@@ -26,9 +26,14 @@ public class RidingMinecartSoundInstanceMixin {
     private void injectAfterClampedLerp(CallbackInfo info) {
         RidingMinecartSoundInstance sound = (RidingMinecartSoundInstance) (Object) this;
         TrackedDataManager manager = TrackedDataManager.INSTANCE;
-        if ((manager.getValue(minecart, ChangeOfCart.WAXED) && CCConfig.COMMON.waxingMuffles.get()) ||
-                (minecart.level.getBlockState(minecart.blockPosition().below()).is(CCBlockTags.MINECART_MUFFLERS) && CCConfig.COMMON.mufflingBlocks.get())) {
+        boolean waxMuffle = manager.getValue(minecart, ChangeOfCart.WAXED) && CCConfig.COMMON.waxingMuffles.get();
+        boolean woolMuffle = minecart.level.getBlockState(minecart.blockPosition().below()).is(CCBlockTags.MINECART_MUFFLERS) && CCConfig.COMMON.mufflingBlocks.get();
+        if (waxMuffle || woolMuffle) {
             sound.volume = Mth.clampedLerp(0.0F, ((float) Mth.clamp(CCConfig.COMMON.maxMuffleVol.get().floatValue(), 0, 0.75)),
+                    (float)this.minecart.getDeltaMovement().horizontalDistance());
+        }
+        if (CCConfig.COMMON.silenceStacks.get() && waxMuffle && woolMuffle) {
+            sound.volume = Mth.clampedLerp(0.0F, ((float) Mth.clamp(0, 0, 0.0)),
                     (float)this.minecart.getDeltaMovement().horizontalDistance());
         }
     }

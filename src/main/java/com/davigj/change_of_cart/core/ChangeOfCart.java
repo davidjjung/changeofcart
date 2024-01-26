@@ -1,5 +1,6 @@
 package com.davigj.change_of_cart.core;
 
+import com.davigj.change_of_cart.core.other.CCCompat;
 import com.teamabnormals.blueprint.common.world.storage.tracking.DataProcessors;
 import com.teamabnormals.blueprint.common.world.storage.tracking.TrackedData;
 import com.teamabnormals.blueprint.common.world.storage.tracking.TrackedDataManager;
@@ -39,7 +40,7 @@ public class ChangeOfCart {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-
+            event.enqueueWork(CCCompat::registerCompat);
         });
     }
 

@@ -28,13 +28,17 @@ public class MinecartSoundInstanceMixin {
         if (!minecart.isRemoved()) {
             MinecartSoundInstance sound = (MinecartSoundInstance) (Object) this;
             TrackedDataManager manager = TrackedDataManager.INSTANCE;
-            if ((manager.getValue(minecart, ChangeOfCart.WAXED) && CCConfig.COMMON.waxingMuffles.get()) ||
-                    (minecart.level.getBlockState(minecart.blockPosition().below()).is(CCBlockTags.MINECART_MUFFLERS) && CCConfig.COMMON.mufflingBlocks.get())) {
+            boolean waxMuffle = manager.getValue(minecart, ChangeOfCart.WAXED) && CCConfig.COMMON.waxingMuffles.get();
+            boolean woolMuffle = minecart.level.getBlockState(minecart.blockPosition().below()).is(CCBlockTags.MINECART_MUFFLERS) && CCConfig.COMMON.mufflingBlocks.get();
+            if (waxMuffle || woolMuffle) {
                 float f = (float)sound.minecart.getDeltaMovement().horizontalDistance();
                 if (f >= 0.01F) {
                     float maxVolume = (float) Mth.clamp(CCConfig.COMMON.maxMuffleVol.get(), 0, 0.75);
                     sound.volume = Mth.lerp(Mth.clamp(f, 0.0F, 0.5F), 0.0F, maxVolume);
                 }
+            }
+            if (CCConfig.COMMON.silenceStacks.get() && waxMuffle && woolMuffle) {
+                sound.volume = 0.0F;
             }
         }
     }
