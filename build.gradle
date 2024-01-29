@@ -78,9 +78,9 @@ sourceSets.main.resources {
 dependencies {
     minecraft "net.minecraftforge:forge:${project.minecraft}-${project.forge}"
     implementation fg.deobf("com.teamabnormals:blueprint:${project.minecraft}-${project.blueprint}")
-    // for Modrinth dependencies: make sure to go to the website and use the URL for the modid, and the version number according to the "Versions" tab
-    // implementation fg.deobf("maven.modrinth:environmental:3.0.0")
-    
+    implementation fg.deobf("maven.modrinth:f9rb8trZ:ccybklNI")
+    compileOnly fg.deobf("maven.modrinth:twkfQtEc:uMZCwusw")
+
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}-common-api:${project.jei}")
     compileOnly fg.deobf("mezz.jei:jei-${project.minecraft}-forge-api:${project.jei}")
     runtimeOnly fg.deobf("mezz.jei:jei-${project.minecraft}-forge:${project.jei}")
