@@ -3,8 +3,8 @@ package com.davigj.change_of_cart.core.mixin;
 import com.davigj.change_of_cart.core.CCConfig;
 import com.davigj.change_of_cart.core.ChangeOfCart;
 import com.davigj.change_of_cart.core.other.CCBlockTags;
+import com.davigj.change_of_cart.core.other.CCItemTags;
 import com.teamabnormals.blueprint.common.world.storage.tracking.TrackedDataManager;
-import galena.copperative.index.CItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleTypes;
@@ -52,7 +52,7 @@ public class AbstractMinecartMixin {
             AbstractMinecart cart = (AbstractMinecart) (Object) this;
             Minecraft minecraft = Minecraft.getInstance();
             Player player = minecraft.player;
-            if (player != null && (player.getMainHandItem().is(CItems.WAX_INDICATORS) || player.getOffhandItem().is(CItems.WAX_INDICATORS))) {
+            if (player != null && (player.getMainHandItem().is(CCItemTags.WAX_INDICATORS) || player.getOffhandItem().is(CCItemTags.WAX_INDICATORS))) {
                 TrackedDataManager manager = TrackedDataManager.INSTANCE;
                 RandomSource random = cart.level().getRandom();
                 if (cart.tickCount % 5 == 0 && player.level() instanceof ClientLevel && manager.getValue(cart, ChangeOfCart.WAXED)) {
