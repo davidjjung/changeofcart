@@ -20,7 +20,7 @@ public class RidingMinecartSoundInstanceMixin {
         if (CCConfig.CLIENT.silenceStacks.get() && waxMuffle && woolMuffle) {
             return 0.0F;
         }
-        return waxMuffle || woolMuffle ? (float) (CCConfig.CLIENT.riderQuietMuffleMultiplier.get() * CCConfig.CLIENT.maxCartVolume.get()
+        return waxMuffle || woolMuffle ? (float) (CCConfig.CLIENT.riderQuietMultiplier.get() * CCConfig.CLIENT.riderQuietMuffleMultiplier.get() * CCConfig.CLIENT.maxCartVolume.get()
                 * (1 - CCConfig.CLIENT.muffleReductionPercent.get())) : (float) (p_144921_ * CCConfig.CLIENT.riderQuietMultiplier.get());
     }
 }
