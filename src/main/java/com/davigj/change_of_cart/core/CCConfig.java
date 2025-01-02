@@ -7,7 +7,8 @@ public class CCConfig {
     public static class Common {
         public final ForgeConfigSpec.ConfigValue<Boolean> waxingMuffles;
         public final ForgeConfigSpec.ConfigValue<Boolean> mufflingBlocks;
-        public final ForgeConfigSpec.ConfigValue<Double> maxMuffleVol;
+        public final ForgeConfigSpec.ConfigValue<Double> muffleReductionPercent;
+        public final ForgeConfigSpec.ConfigValue<Double> maxCartVolume;
         public final ForgeConfigSpec.ConfigValue<Boolean> silenceStacks;
         public final ForgeConfigSpec.ConfigValue<Integer> railBeddingBonus;
         public final ForgeConfigSpec.ConfigValue<Integer> waxFrictionBonus;
@@ -16,10 +17,11 @@ public class CCConfig {
             builder.push("changes");
             waxingMuffles = builder.comment("Whether waxing a cart muffles it or not").define("Waxing muffles", true);
             mufflingBlocks = builder.comment("Whether carts are muffled by riding on the minecart_mufflers blocktag").define("Blocks muffle", true);
-            maxMuffleVol = builder.comment("Max volume of a muffled minecart. Clamped between 0.0 and 0.75").define("Maximum minecart volume", 0.15);
+            muffleReductionPercent = builder.comment("Percent reduction of muffled minecart sound. Higher the number, quieter the muffled cart").defineInRange("Muffled minecart sound reduction percentage", 0.8, 0, 1);
+            maxCartVolume = builder.comment("How loud minecarts can be in general").defineInRange("Max minecart volume", 0.75, 0, 0.75);
             silenceStacks = builder.comment("Waxed carts on minecart_mufflers are completely silent").define("Muffling properties stack", false);
-            railBeddingBonus = builder.comment("Reduced friction bonus for rail bedding, integer from 1 to 10.").define("rail bedding bonus", 8);
-            waxFrictionBonus = builder.comment("Reduced friction bonus for waxed carts, integer from 1 to 10.").define("waxy cart bonus", 0);
+            railBeddingBonus = builder.comment("Reduced friction bonus for rail bedding, 1 to 10. 0 disables the bonus").defineInRange("rail bedding bonus", 8, 0, 10);
+            waxFrictionBonus = builder.comment("Reduced friction bonus for waxed carts, 1 to 10. 0 disables the bonus").defineInRange("waxy cart bonus", 0, 0, 10);
             builder.pop();
         }
     }
