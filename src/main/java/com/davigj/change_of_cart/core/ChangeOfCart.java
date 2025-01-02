@@ -33,7 +33,9 @@ public class ChangeOfCart {
         bus.addListener(this::commonSetup);
         bus.addListener(this::clientSetup);
         bus.addListener(this::dataSetup);
+
         context.registerConfig(ModConfig.Type.COMMON, CCConfig.COMMON_SPEC);
+        context.registerConfig(ModConfig.Type.CLIENT, CCConfig.CLIENT_SPEC);
 
         TrackedDataManager.INSTANCE.registerData(new ResourceLocation(MOD_ID, "waxed"), WAXED);
     }

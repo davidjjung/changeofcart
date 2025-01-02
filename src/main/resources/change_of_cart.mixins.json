@@ -8,7 +8,9 @@
     "AbstractMinecartMixin"
   ],
   "client": [
-    "LocalPlayerMixin",
+    "IAbstractSoundInstanceAccessor",
+    "IMinecartSoundInstanceAccessor",
+    "IRidingMinecartSoundInstanceAccessor",
     "MinecartSoundInstanceMixin",
     "RidingMinecartSoundInstanceMixin"
   ],

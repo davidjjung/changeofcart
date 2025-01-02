@@ -34,13 +34,13 @@ public abstract class MinecartSoundInstanceMixin extends AbstractTickableSoundIn
     private void injected(MinecartSoundInstance instance, float value, @Local float f) {
         AbstractMinecart minecart = ((IMinecartSoundInstanceAccessor) this).getMinecart();
         TrackedDataManager manager = TrackedDataManager.INSTANCE;
-        boolean waxMuffle = manager.getValue(instance.minecart, ChangeOfCart.WAXED) && CCConfig.COMMON.waxingMuffles.get();
-        boolean woolMuffle = minecart.level().getBlockState(minecart.blockPosition().below()).is(CCBlockTags.MINECART_MUFFLERS) && CCConfig.COMMON.mufflingBlocks.get();
-        if (CCConfig.COMMON.silenceStacks.get() && waxMuffle && woolMuffle) {
+        boolean waxMuffle = manager.getValue(minecart, ChangeOfCart.WAXED) && CCConfig.CLIENT.waxingMuffles.get();
+        boolean woolMuffle = minecart.level().getBlockState(minecart.blockPosition().below()).is(CCBlockTags.MINECART_MUFFLERS) && CCConfig.CLIENT.mufflingBlocks.get();
+        if (CCConfig.CLIENT.silenceStacks.get() && waxMuffle && woolMuffle) {
             ((IAbstractSoundInstanceAccessor) this).setVolume(0.0F);
         } else if (waxMuffle || woolMuffle) {
             ((IAbstractSoundInstanceAccessor) this).setVolume((float) Mth.lerp(Mth.clamp(f, 0.0F, 0.5F), 0.0F,
-                    CCConfig.COMMON.maxCartVolume.get() * (1 - CCConfig.COMMON.muffleReductionPercent.get())));
+                    CCConfig.CLIENT.maxCartVolume.get() * (1 - CCConfig.CLIENT.muffleReductionPercent.get())));
         } else {
             ((IAbstractSoundInstanceAccessor) this).setVolume(value);
         }
