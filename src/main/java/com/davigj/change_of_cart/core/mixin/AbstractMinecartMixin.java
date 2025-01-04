@@ -4,9 +4,6 @@ import com.davigj.change_of_cart.core.CCConfig;
 import com.davigj.change_of_cart.core.ChangeOfCart;
 import com.davigj.change_of_cart.core.other.CCBlockTags;
 import com.davigj.change_of_cart.core.other.CCItemTags;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import com.llamalad7.mixinextras.sugar.Local;
 import com.teamabnormals.blueprint.common.world.storage.tracking.TrackedDataManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -15,7 +12,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
-import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.ModList;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,21 +43,23 @@ public class AbstractMinecartMixin {
 
 
     // Copperative compat
+    @OnlyIn(Dist.CLIENT)
     @Inject(method = "tick", at = @At("HEAD"))
     private void onTick(CallbackInfo ci) {
         if (ModList.get().isLoaded("copperative")) {
             AbstractMinecart cart = (AbstractMinecart) (Object) this;
-            Minecraft minecraft = Minecraft.getInstance();
-            Player player = minecraft.player;
-            if (player != null && (player.getMainHandItem().is(CCItemTags.WAX_INDICATORS) || player.getOffhandItem().is(CCItemTags.WAX_INDICATORS))) {
-                TrackedDataManager manager = TrackedDataManager.INSTANCE;
-                RandomSource random = cart.level().getRandom();
-                if (cart.tickCount % 5 == 0 && player.level() instanceof ClientLevel && manager.getValue(cart, ChangeOfCart.WAXED)) {
-                    cart.level().addParticle(ParticleTypes.WAX_ON, cart.getX() + random.nextDouble() - 0.5,
-                            cart.getEyeY() + random.nextDouble() - 0.35, cart.getZ() + random.nextDouble() - 0.5, 0, 0, 0);
+            if (cart.level().isClientSide) {
+                Minecraft minecraft = Minecraft.getInstance();
+                Player player = minecraft.player;
+                if (player != null && (player.getMainHandItem().is(CCItemTags.WAX_INDICATORS) || player.getOffhandItem().is(CCItemTags.WAX_INDICATORS))) {
+                    TrackedDataManager manager = TrackedDataManager.INSTANCE;
+                    RandomSource random = cart.level().getRandom();
+                    if (cart.tickCount % 5 == 0 && player.level() instanceof ClientLevel && manager.getValue(cart, ChangeOfCart.WAXED)) {
+                        cart.level().addParticle(ParticleTypes.WAX_ON, cart.getX() + random.nextDouble() - 0.5,
+                                cart.getEyeY() + random.nextDouble() - 0.35, cart.getZ() + random.nextDouble() - 0.5, 0, 0, 0);
+                    }
                 }
             }
         }
     }
-
 }
