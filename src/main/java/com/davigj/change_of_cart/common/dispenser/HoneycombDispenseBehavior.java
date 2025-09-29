@@ -3,7 +3,7 @@ package com.davigj.change_of_cart.common.dispenser;
 import com.davigj.change_of_cart.core.ChangeOfCart;
 import com.teamabnormals.blueprint.common.world.storage.tracking.TrackedDataManager;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockSource;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -20,9 +20,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class HoneycombDispenseBehavior extends OptionalDispenseItemBehavior {
     protected @NotNull ItemStack execute(BlockSource p_123580_, @NotNull ItemStack stack) {
-        ServerLevel level = p_123580_.getLevel();
+        ServerLevel level = p_123580_.level();
         if (!level.isClientSide()) {
-            BlockPos blockpos = p_123580_.getPos().relative(p_123580_.getBlockState().getValue(DispenserBlock.FACING));
+            BlockPos blockpos = p_123580_.pos().relative(p_123580_.state().getValue(DispenserBlock.FACING));
             this.setSuccess(tryWaxCart(level, blockpos));
             if (this.isSuccess()) {
                 stack.shrink(1);

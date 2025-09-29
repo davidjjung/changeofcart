@@ -1,14 +1,15 @@
 package com.davigj.change_of_cart.core;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+
+import net.neoforged.neoforge.common.ModConfigSpec;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class CCConfig {
     public static class Common {
-        public final ForgeConfigSpec.ConfigValue<Integer> railBeddingBonus;
-        public final ForgeConfigSpec.ConfigValue<Integer> waxFrictionBonus;
+        public final ModConfigSpec.ConfigValue<Integer> railBeddingBonus;
+        public final ModConfigSpec.ConfigValue<Integer> waxFrictionBonus;
 
-        Common (ForgeConfigSpec.Builder builder) {
+        Common (ModConfigSpec.Builder builder) {
             builder.push("common");
             railBeddingBonus = builder.comment("Reduced friction bonus for rail bedding, 1 to 10. 0 disables the bonus").defineInRange("rail bedding bonus", 8, 0, 10);
             waxFrictionBonus = builder.comment("Reduced friction bonus for waxed carts, 1 to 10. 0 disables the bonus").defineInRange("waxy cart bonus", 0, 0, 10);
@@ -17,15 +18,15 @@ public class CCConfig {
     }
 
     public static class Client {
-        public final ForgeConfigSpec.ConfigValue<Boolean> waxingMuffles;
-        public final ForgeConfigSpec.ConfigValue<Boolean> mufflingBlocks;
-        public final ForgeConfigSpec.ConfigValue<Double> muffleReductionPercent;
-        public final ForgeConfigSpec.ConfigValue<Double> maxCartVolume;
-        public final ForgeConfigSpec.ConfigValue<Boolean> silenceStacks;
-        public final ForgeConfigSpec.ConfigValue<Double> riderQuietMuffleMultiplier;
-        public final ForgeConfigSpec.ConfigValue<Double> riderQuietMultiplier;
+        public final ModConfigSpec.ConfigValue<Boolean> waxingMuffles;
+        public final ModConfigSpec.ConfigValue<Boolean> mufflingBlocks;
+        public final ModConfigSpec.ConfigValue<Double> muffleReductionPercent;
+        public final ModConfigSpec.ConfigValue<Double> maxCartVolume;
+        public final ModConfigSpec.ConfigValue<Boolean> silenceStacks;
+        public final ModConfigSpec.ConfigValue<Double> riderQuietMuffleMultiplier;
+        public final ModConfigSpec.ConfigValue<Double> riderQuietMultiplier;
 
-        public Client(ForgeConfigSpec.Builder builder) {
+        public Client(ModConfigSpec.Builder builder) {
             builder.push("client");
             waxingMuffles = builder.comment("Whether waxing a cart muffles it or not").define("Waxing muffles", true);
             mufflingBlocks = builder.comment("Whether carts are muffled by riding on the minecart_mufflers blocktag").define("Blocks muffle", true);
@@ -39,18 +40,18 @@ public class CCConfig {
     }
 
 
-    static final ForgeConfigSpec COMMON_SPEC;
+    static final ModConfigSpec COMMON_SPEC;
     public static final CCConfig.Common COMMON;
 
-    public static final ForgeConfigSpec CLIENT_SPEC;
+    public static final ModConfigSpec CLIENT_SPEC;
     public static final Client CLIENT;
 
     static {
-        final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(CCConfig.Common::new);
+        final Pair<Common, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(CCConfig.Common::new);
         COMMON_SPEC = specPair.getRight();
         COMMON = specPair.getLeft();
 
-        Pair<Client, ForgeConfigSpec> clientSpecPair = new ForgeConfigSpec.Builder().configure(Client::new);
+        Pair<Client, ModConfigSpec> clientSpecPair = new ModConfigSpec.Builder().configure(Client::new);
         CLIENT_SPEC = clientSpecPair.getRight();
         CLIENT = clientSpecPair.getLeft();
     }

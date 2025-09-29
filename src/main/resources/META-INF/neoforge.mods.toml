@@ -1,17 +1,20 @@
 modLoader = "javafml"
-loaderVersion = "[47,)"
+loaderVersion = "[1,)"
 issueTrackerURL = "https://github.com/davidjjung/changeofcart/issues"
 license = "MIT License"
 
+[[mixins]]
+config = "change_of_cart.mixins.json"
+
 [[mods]]
 modId = "change_of_cart"
-version = "${file.jarVersion}"
+version = "${mod_version}"
 logoFile = "logo.png"
 itemIcon = "minecraft:minecart"
-configBackground = "minecraft:textures/block/gravel.png"
+configBackground = "minecraft:textures/block/white_wool.png"
 authors = "DavigJ"
-credits = "Zym's concept. Special thanks to tallestred and Jsburg"
-displayURL = "https://github.com/davidjjung/changeofcart"
+credits = "Credits to Zym for the mod concept. Thanks to Jsburg and tallestred for code assistance"
+displayURL = "https://modrinth.com/project/change-of-cart"
 displayName = "Change of Cart"
 description = '''
     Minecart QoL. Muffle carts with wax/wool, or reduce friction using gravel bedding.
@@ -19,21 +22,21 @@ description = '''
 
 [[dependencies.change_of_cart]]
 modId = "minecraft"
-mandatory = true
-versionRange = "[1.20.1,1.20.2)"
-ordering = "NONE"
+type = "required"
+versionRange = "[${mc_version}]"
+ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.change_of_cart]]
-modId = "forge"
-mandatory = true
-versionRange = "[47.1.0,)"
-ordering = "NONE"
+modId = "neoforge"
+type = "required"
+versionRange = "[${neoforge},)"
+ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies.change_of_cart]]
 modId = "blueprint"
-mandatory = true
-versionRange = "[7.0.0,)"
+type = "required"
+versionRange = "[${blueprint},)"
 ordering = "AFTER"
 side = "BOTH"

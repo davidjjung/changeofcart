@@ -6,19 +6,18 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.AbstractMinecart;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
-@Mod.EventBusSubscriber(modid = ChangeOfCart.MOD_ID)
+@EventBusSubscriber(modid = ChangeOfCart.MOD_ID)
 public class CCEvents {
     static TrackedDataManager manager = TrackedDataManager.INSTANCE;
 
@@ -51,9 +50,7 @@ public class CCEvents {
                     manager.setValue(cart, ChangeOfCart.WAXED, false);
                     player.swing(event.getHand());
                     if (!player.getAbilities().instabuild) {
-                        player.getItemInHand(event.getHand()).hurtAndBreak(1, player, (entity) -> {
-                            entity.broadcastBreakEvent(player.getItemInHand(event.getHand()).isEmpty() ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND);
-                        });
+                        player.getItemInHand(event.getHand()).hurtAndBreak(1, player, LivingEntity.getSlotForHand(event.getHand()));
                     }
                     RandomSource random = cart.level().getRandom();
                     if (player.level().isClientSide) {
